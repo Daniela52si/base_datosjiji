@@ -135,6 +135,7 @@ CREATE TABLE pago (
     CONSTRAINT fk_pago_matricula
         FOREIGN KEY (matriculaID)
         REFERENCES matricula (matriculaID)
-    ALTER TABLE pago
-    ADD estado_pago VARCHAR(255) NOT NULL
+    
 );
+ALTER TABLE pago
+    ADD estado_pago VARCHAR(255) NOT NULL;
