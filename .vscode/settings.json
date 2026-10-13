@@ -12,7 +12,7 @@
             "driver": "MariaDB",
             "name": "localhost",
             "username": "root",
-            "database": "practica_sql",
+            "database": "Sistema_academico",
             "password": ""
         }
     ]

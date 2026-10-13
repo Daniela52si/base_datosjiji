@@ -1,55 +1,70 @@
 # Glob-Gusters Video-Club · Base de Datos Relacional
 
-Script SQL correspondiente al ejercicio de la cadena de Video-Clubs **Glob-Gusters**, desarrollado como
-material de apoyo para la asignatura de Base de Datos (Ingeniería de Sistemas).
 
 Motor de base de datos: **MariaDB / MySQL** sobre entorno **XAMPP**.
+# Sistema_academico
 
-## Contenido del repositorio
+Proyecto de base de datos relacional en MySQL para gestionar un sistema académico: programas, estudiantes, periodos, asignaturas, grupos, horarios, matrículas y pagos.
+
+**Autora:** Yenifer Daniela Gonzalez Cardenas
+**Fecha:** 2026-10-13
+
+## Herramientas utilizadas
+
+- MySQL (servidor local con XAMPP)
+- phpMyAdmin
+- Visual Studio Code con la extensión SQLTools
+
+## Estructura del proyecto
 
 ```
-glob-gusters-videoclub/
-├── sql/
-│   └── glob_gusters.sql   # Script DDL + datos de prueba + consultas de verificación
-├── docs/                  # Espacio reservado para el diagrama E-R exportado desde MySQL Workbench
-├── .gitignore
-├── LICENSE
-└── README.md
+resolucion_sql/
+├── 01_DDL.sql   -> Crea la base de datos y las tablas
+├── 02_DML.sql   -> Inserta datos ficticios, actualiza y elimina
+├── 03_DQL.sql   -> Consultas SELECT
+├── 04_VDL.sql   -> Vistas
+├── 05_DCL.sql   -> Usuarios y permisos
+└── 06_TCL.sql   -> Transacciones
 ```
 
-## Requisitos previos
+## Tablas de la base de datos
 
-- XAMPP con MariaDB/MySQL habilitado.
-- Variable de entorno `Path` de Windows apuntando a `C:\xampp\mysql\bin`.
-- Visual Studio Code con la extensión "MySQL" o "SQLTools".
-- MySQL Workbench (para la ingeniería inversa del modelo E-R).
-- Git instalado y una cuenta de GitHub.
+| Tabla | Descripción |
+|---|---|
+| PROGRAMA_ACADEMICO | Programas que ofrece la institución |
+| ESTUDIANTE | Datos de los estudiantes |
+| PERIODO_ACADEMICO | Periodos académicos de cada programa |
+| asignatura | Materias y sus créditos |
+| PERIODO_ACADEMICO_ASIGNATURA | Relación entre periodos y asignaturas |
+| grupo | Grupos de cada asignatura con su cupo |
+| horario | Día, hora y aula de cada grupo |
+| matricula | Matrícula de un estudiante en un periodo |
+| matricula_grupo | Grupos en los que está inscrita cada matrícula |
+| pago | Pagos realizados por cada matrícula |
 
-## Ejecución del script (PowerShell)
+## Cómo ejecutar los scripts
 
-```powershell
-# 1. Verificar que el cliente mysql es accesible desde la terminal
-mysql --version
+1. Iniciar MySQL desde XAMPP.
+2. Conectar SQLTools a `localhost` (puerto 3306, usuario `root`).
+3. Ejecutar los scripts **en este orden**:
+   1. `01_DDL.sql`
+   2. `02_DML.sql`
+   3. `03_DQL.sql`
+   4. `04_VDL.sql`
+   5. `05_DCL.sql`
+   6. `06_TCL.sql`
 
-# 2. Ejecutar el script contra el servidor local de XAMPP
-mysql -u root -p < sql/glob_gusters.sql
-```
+## Contenido de cada script
 
-Si la conexión es exitosa, el script crea la base de datos `glob_gusters`, sus tablas, las
-restricciones de integridad referencial, un disparador de regla de negocio y un conjunto de
-datos de prueba.
+- **DDL (Data Definition Language):** `CREATE DATABASE`, `CREATE TABLE`, `ALTER TABLE`.
+- **DML (Data Manipulation Language):** `INSERT`, `UPDATE`, `DELETE`.
+- **DQL (Data Query Language):** `SELECT` con `WHERE`, `ORDER BY`, `GROUP BY`, funciones de agregación y `JOIN`.
+- **VDL (View Definition Language):** `CREATE VIEW` y `DROP VIEW`.
+- **DCL (Data Control Language):** `CREATE USER`, `GRANT`, `REVOKE`.
+- **TCL (Transaction Control Language):** `START TRANSACTION`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`.
 
-## Cómo subir este proyecto a GitHub
+## Notas
 
-```powershell
-git init
-git add .
-git commit -m "Primer commit: script SQL Glob-Gusters"
-git branch -M main
-git remote add origin https://github.com/<usuario>/glob-gusters-videoclub.git
-git push -u origin main
-```
-
-## Licencia
-
-Este proyecto se distribuye bajo licencia MIT. Véase el archivo [LICENSE](LICENSE).
+- El `01_DDL.sql` incluye una línea `DROP DATABASE` comentada. Si se activa, borra la base de datos y todos sus datos.
+- El `02_DML.sql` debe ejecutarse una sola vez; si se repite, aparece el error `Duplicate entry` por las llaves primarias.
+- Los usuarios creados en el `05_DCL.sql` usan contraseñas de ejemplo, solo para la práctica.
